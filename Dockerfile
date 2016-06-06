@@ -21,11 +21,6 @@ RUN apt-get -qq update \
     && apt-get -qqy install --no-install-recommends icinga2 icinga2-ido-mysql icinga-web nagios-plugins icingaweb2 icingacli \
     && apt-get clean
 
-ADD content/ /
-
-RUN chmod u+x /opt/supervisor/mysql_supervisor /opt/supervisor/icinga2_supervisor /opt/supervisor/apache2_supervisor
-RUN chmod u+x /opt/run
-
 # Temporary hack to get icingaweb2 modules via git
 RUN mkdir -p /etc/icingaweb2/enabledModules
 RUN wget --no-cookies "https://github.com/Icinga/icingaweb2/archive/v2.3.2.zip" -O /tmp/icingaweb2.zip
@@ -41,6 +36,11 @@ RUN cp -R /tmp/director/icingaweb2-module-director-master/* /etc/icingaweb2/modu
 RUN rm -rf /tmp/director
 
 EXPOSE 80 443 5665
+
+ADD content/ /
+
+RUN chmod u+x /opt/supervisor/mysql_supervisor /opt/supervisor/icinga2_supervisor /opt/supervisor/apache2_supervisor
+RUN chmod u+x /opt/run
 
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]
