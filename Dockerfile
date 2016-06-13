@@ -45,5 +45,7 @@ ADD content/ /
 RUN chmod u+x /opt/supervisor/mysql_supervisor /opt/supervisor/icinga2_supervisor /opt/supervisor/apache2_supervisor
 RUN chmod u+x /opt/run
 
+RUN chmod u+s /bin/ping && chmod u+s /bin/ping6
+
 # Initialize and run Supervisor
 ENTRYPOINT ["/opt/run"]
