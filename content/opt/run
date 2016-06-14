@@ -2,6 +2,9 @@
 
 set -e
 
+SMTP_MAILHUB=${SMTP_MAILHUB:-mail}
+SMTP_HOSTNAME=${SMTP_HOSTNAME:-localhost}
+
 initfile=/etc/icinga2/run.init
 
 chmod 1777 /tmp
@@ -19,6 +22,12 @@ chown -fR www-data:icingaweb2 /etc/icingaweb2/*
 find /etc/icingaweb2 -type f -name "*.ini" -exec chmod 660 {} \;
 find /etc/icingaweb2 -type d -exec chmod 2770 {} \;
 
+# Configure ssmtp
+cat > "/etc/ssmtp/ssmtp.conf" <<EOF
+root=postmaster
+mailhub=${SMTP_MAILHUB}
+hostname=${SMTP_HOSTNAME}
+EOF
 
 if [ ! -f "${initfile}" ]; then
 
