@@ -58,7 +58,8 @@ ICINGA2_FEATURE_GRAPHITE - false (default).  Set to true or 1 to enable graphite
 ICINGA2_FEATURE_GRAPHITE_HOST - graphite (default).  Set to link name, hostname, or IP address where Carbon daemon is running
 ICINGA2_FEATURE_GRAPHITE_PORT - 2003 (default).  Carbon port
 DIRECTOR_KICKSTART - true (default).  Set to false to disable director auto kickstart at container startup
-
+SMTP_MAILHUB - smtp relay host, e.g. localhost:25
+SMTP_HOSTNAME - hostname utilized as origin of the smtp message
 ```
 
 ```
